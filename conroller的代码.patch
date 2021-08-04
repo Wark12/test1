@@ -1,0 +1,39 @@
+Index: maven02/src/main/java/com/controller/TestController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- maven02/src/main/java/com/controller/TestController.java	(date 1626690416820)
++++ maven02/src/main/java/com/controller/TestController.java	(date 1626690416820)
+@@ -0,0 +1,31 @@
++package com.controller;
++
++import com.entity.StudentInfo;
++import com.service.TestService;
++import org.springframework.stereotype.Controller;
++import org.springframework.ui.Model;
++import org.springframework.web.bind.annotation.RequestMapping;
++
++import javax.annotation.Resource;
++import java.util.List;
++
++@Controller
++public class TestController {
++    @Resource
++    private TestService testService;
++
++    public TestService getTestService() {
++        return testService;
++    }
++
++    public void setTestService(TestService testService) {
++        this.testService = testService;
++    }
++    @RequestMapping(value = "queryAll")
++    public String queryAll(Model m){
++        System.out.println("------");
++        List<StudentInfo> stulist=testService.queryAll();
++        m.addAttribute("stuliist",stulist);
++        return "showAll";
++    }
++}
